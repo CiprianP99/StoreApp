@@ -3,19 +3,24 @@ import ReactDOM from 'react-dom';
 import './app/layout/styles.css';
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Router } from 'react-router-dom';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { StoreProvider } from './app/context/StoreContext';
+import { Provider } from 'react-redux';
+import { store } from './app/store/configureStore';
+import {createBrowserHistory} from "history"
 
+export const history = createBrowserHistory();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <StoreProvider>
+    <Router history={history}>
+      {/* <StoreProvider> without redux*/}
+        <Provider store = {store}>
         <App />
-      </StoreProvider>
-    </BrowserRouter>
+        </Provider>
+      {/* </StoreProvider> */}
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
